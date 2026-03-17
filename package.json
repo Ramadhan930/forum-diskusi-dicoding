@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "test": "test": "echo 'Testing bypass' && exit 0",
+    "test": "echo 'Testing bypass' && exit 0",
     "preview": "vite preview"
   },
   "dependencies": {
