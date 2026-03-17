@@ -1,28 +1,57 @@
-import React from 'react';
 import PropTypes from 'prop-types'; // Wajib untuk Bintang 5
 import { Link } from 'react-router-dom';
 import { postedAt } from '../utils';
 
 // Pastikan deklarasi komponennya seperti ini (langsung pakai export default juga boleh)
-function ThreadItem({ id, title, body, category, createdAt, totalComments, user }) {
+function ThreadItem({
+  id,
+  title,
+  body,
+  category,
+  createdAt,
+  totalComments,
+  user,
+}) {
   return (
-    <div className="thread-item" style={{ border: '1px solid #eee', padding: '1rem', marginBottom: '1rem', borderRadius: '8px' }}>
+    <div
+      className="thread-item"
+      style={{
+        border: '1px solid #eee',
+        padding: '1rem',
+        marginBottom: '1rem',
+        borderRadius: '8px',
+      }}
+    >
       <header>
-        <span className="category" style={{ backgroundColor: '#eee', padding: '2px 8px', borderRadius: '4px' }}>
+        <span
+          className="category"
+          style={{
+            backgroundColor: '#eee',
+            padding: '2px 8px',
+            borderRadius: '4px',
+          }}
+        >
           #{category}
         </span>
         <h3 style={{ margin: '10px 0' }}>
-          <Link to={`/threads/${id}`} style={{ color: '#0066ff', textDecoration: 'none' }}>
+          <Link
+            to={`/threads/${id}`}
+            style={{ color: '#0066ff', textDecoration: 'none' }}
+          >
             {title}
           </Link>
         </h3>
       </header>
-      <article 
-        style={{ marginBottom: '1rem' }} 
-        dangerouslySetInnerHTML={{ __html: body.substring(0, 150) + (body.length > 150 ? '...' : '') }} 
+      <article
+        style={{ marginBottom: '1rem' }}
+        dangerouslySetInnerHTML={{
+          __html: body.substring(0, 150) + (body.length > 150 ? '...' : ''),
+        }}
       />
       <footer style={{ fontSize: '0.8rem', color: '#666' }}>
-        <span>Dibuat oleh <strong>{user?.name || 'Anonim'}</strong></span>
+        <span>
+          Dibuat oleh <strong>{user?.name || 'Anonim'}</strong>
+        </span>
         <span style={{ margin: '0 10px' }}>•</span>
         <span>{postedAt(createdAt)}</span>
         <span style={{ margin: '0 10px' }}>•</span>
