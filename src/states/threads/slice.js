@@ -22,7 +22,7 @@ export const asyncPopulateUsersAndThreads = () => async (dispatch) => {
       api.getAllUsers(),
       api.getAllThreads(),
     ]);
-    
+
     dispatch(receiveUsers(users));
     dispatch(receiveThreads(threads));
   } catch (error) {

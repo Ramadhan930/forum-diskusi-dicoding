@@ -1,10 +1,11 @@
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { createSlice } from '@reduxjs/toolkit';
 import api from '../../utils/api';
 import { setAuthUser } from '../authUser/slice';
 
 const isPreloadSlice = createSlice({
   name: 'isPreload',
-  initialState: true, // Defaultnya true (sedang loading ngecek data)
+  initialState: true,
   reducers: {
     setIsPreload: (_, action) => action.payload,
   },
@@ -13,15 +14,19 @@ const isPreloadSlice = createSlice({
 export const { setIsPreload } = isPreloadSlice.actions;
 
 export const asyncPreloadProcess = () => async (dispatch) => {
+  // 1. Jalankan Loading Bar segera setelah fungsi dipanggil
+  dispatch(showLoading());
+
   try {
-    // 1. Ambil data user yang sedang login dari API
-    const authUser = await api.getOwnProfile(); // Kita perlu tambah fungsi ini di api.js nanti
+    const authUser = await api.getOwnProfile();
     dispatch(setAuthUser(authUser));
   } catch {
     dispatch(setAuthUser(null));
   } finally {
-    // 2. Selesai ngecek, set preload jadi false
+    // 2. Selesai proses, matikan preload state aplikasi
     dispatch(setIsPreload(false));
+    // 3. Matikan Loading Bar (ini yang diminta reviewer)
+    dispatch(hideLoading());
   }
 };
 
