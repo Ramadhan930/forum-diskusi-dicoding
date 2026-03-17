@@ -1,7 +1,7 @@
 name: Continuous Integration
 on: [pull_request, push]
 jobs:
-  test: # <--- INI NAMA WORKFLOW KAMU
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -10,7 +10,7 @@ jobs:
         with:
           node-version: '18'
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps 
       - name: Run Lint
         run: npm run lint
       - name: Run Test
